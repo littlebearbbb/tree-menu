@@ -17,10 +17,11 @@ export default class TreeCheckGroup extends Component {
     };
     
     renderChildren (props) {
-        return React.Children.map(this.props.children,child=>{
+        return React.Children.map(props.children,child=>{
             if(child.type === TreeCheckItem){
                 return React.cloneElement(child,{
-                    parentId:this.props.id
+                    parentId: props.id,
+                    onChange: props.onChange
                 });
             }else{
                 return null;

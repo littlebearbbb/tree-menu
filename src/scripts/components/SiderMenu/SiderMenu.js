@@ -63,6 +63,10 @@ export default class SiderMenu extends Component {
             treeData
         });
     }
+    /**
+     * 初始化数据
+     * @param {*} data 
+     */
     initData (data) {
         let treeData = [...data];
         function _init(_data){
@@ -90,8 +94,6 @@ export default class SiderMenu extends Component {
         let treeData = [...this.state.treeData];
             treeData.map((el,key)=>{
                 if(el.id === parentID){
-                    console.log('childId');
-                    console.log(childId);
                     if(childId != null){
                         el.children = el.children.map((el1,key1)=>{
                             if(el1.id === childId){
@@ -99,6 +101,13 @@ export default class SiderMenu extends Component {
                             }
                             return el1;
                         })
+
+                        if(el.children.every(el=>el.isChecked)){
+                            el.isChecked = true;
+                        }
+                        if(el.children.some(el=>!el.isChecked)){
+                            el.isChecked = false;
+                        }
                         
                     }else{
                         el.isChecked = isChecked;
@@ -116,19 +125,29 @@ export default class SiderMenu extends Component {
                 treeData
             });
     }
-
-
-
+    /**
+     * 生成树状菜单
+     * @param {*} data 
+     */
     generateTree (data) {
         return (
             data.map((el,key)=>(
                 <TreeCheckGroup className="tree-group" id={el.id} key={key} name={el.name} count={el.count} checked={el.isChecked} onChange={this.treeChangeHandler} >
                     {el.children&&el.children.length>0&&el.children.map((el1,key1)=>(
-                        <TreeCheckItem key={key1} id={el1.id} name={el1.name} count={el1.count} checked={el1.isChecked} onChange={this.treeChangeHandler} />
+                        <TreeCheckItem key={key1} id={el1.id} name={el1.name} count={el1.count} checked={el1.isChecked} />
                      ))}
                 </TreeCheckGroup>
             ))
         );
+    }
+    /**
+     * 清空选项
+     */
+    clear() {
+        const treeData = this.initData(this.state.treeData)
+        this.setState({
+            treeData
+        });
     }
 
 
@@ -139,7 +158,7 @@ export default class SiderMenu extends Component {
                 <div>
                     <div className="clearfix" style={{marginBottom:'23px'}}>
                         <span className="menu-title left">招聘职位</span>
-                        <span className="right clear">清空</span>   
+                        <span className="right clear" onClick={()=>{ this.clear() }}>清空</span>   
                     </div>
                     { this.generateTree(treeData) }
                 </div>

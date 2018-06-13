@@ -13,3 +13,8 @@ a tree-menu mission
 - 修改create-react-app创建的目录为Idiomatic
 - 为create-react-app添加less支持
 - 为常用的文件夹设置别名
+
+## 2018/6/13 2:00 -  2018/6/13 4:20
+- 完成所有样式相关内容
+- 完成组件拆分
+- 学习了REACT部分基础知识

@@ -1,0 +1,49 @@
+@import './var.less';
+.group-container,.item-container{
+    font-size: 0;
+    position: relative;
+    .checkbox{
+        display: inline-block;
+        vertical-align: top;
+        width: 20px;
+        height: 20px;
+        border: 1px solid @gray;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+    .group-name{
+        font-size: @font-sm;
+        color: @white;
+        margin-left: 17px;
+    }
+    .arrow{
+        color: @white;
+        margin-left: 10px;
+        position: relative;
+        top: 2px;
+    }
+    .count-container{
+        padding: 0 12px;
+        height: 30px;
+        line-height: 30px;
+        background-color: @deep-gray;
+        border-radius: 20px;
+        font-size: @font-sm;
+        color: @white;
+    }
+    .item-count{
+        height: 30px;
+        line-height: 30px;
+        font-size: @font-sm;
+        color: @gray;
+    }
+    .item-name{
+        font-size: @font-sm;
+        margin-left: 17px;
+        color: @gray;
+    }
+}
+
+.item-container{
+    margin-bottom: 10px;
+}

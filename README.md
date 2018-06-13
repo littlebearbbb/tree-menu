@@ -8,3 +8,8 @@ a tree-menu mission
 - github项目建立
 - 使用create-react-app创建react项目
 - 上传到github服务器
+
+## 2018/6/13 1:30 - 2018/6/14 2:15
+- 修改create-react-app创建的目录为Idiomatic
+- 为create-react-app添加less支持
+- 为常用的文件夹设置别名

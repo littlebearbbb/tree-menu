@@ -83,13 +83,48 @@ export default class SiderMenu extends Component {
         }
         return _init(treeData);
     }
+    /**
+     * tree被点击时触发的方法
+     */
+    treeChangeHandler =  (isChecked,parentID,childId=null) => {
+        let treeData = [...this.state.treeData];
+            treeData.map((el,key)=>{
+                if(el.id === parentID){
+                    console.log('childId');
+                    console.log(childId);
+                    if(childId != null){
+                        el.children = el.children.map((el1,key1)=>{
+                            if(el1.id === childId){
+                                el1.isChecked = isChecked;
+                            }
+                            return el1;
+                        })
+                        
+                    }else{
+                        el.isChecked = isChecked;
+                        if(el.children&&el.children.length>0){
+                            el.children = el.children.map((el1,key1)=>{
+                                el1.isChecked = isChecked;
+                                return el1;
+                            })
+                        }
+                    }
+                }
+                return el;
+            });
+            this.setState({
+                treeData
+            });
+    }
+
+
 
     generateTree (data) {
         return (
             data.map((el,key)=>(
-                <TreeCheckGroup className="tree-group" id={el.id} key={key} name={el.name} count={el.count} checked={el.isChecked}>
+                <TreeCheckGroup className="tree-group" id={el.id} key={key} name={el.name} count={el.count} checked={el.isChecked} onChange={this.treeChangeHandler} >
                     {el.children&&el.children.length>0&&el.children.map((el1,key1)=>(
-                        <TreeCheckItem key={key1} name={el1.name} count={el1.count} checked={el.isChecked} />
+                        <TreeCheckItem key={key1} id={el1.id} name={el1.name} count={el1.count} checked={el1.isChecked} onChange={this.treeChangeHandler} />
                      ))}
                 </TreeCheckGroup>
             ))
